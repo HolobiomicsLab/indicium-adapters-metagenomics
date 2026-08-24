@@ -39,13 +39,16 @@ for Metatranscriptomics, which is why the same topic is named as a root in both 
 
 Walking from these four roots (each root plus its direct EDAM subclasses, every preferred label
 and every exact synonym) currently yields a small, honest index: EDAM's Metagenomics topic has
-no further subclasses of its own beyond what the extra roots contribute. `subdomains` is read
-off the same walk, so it cannot list a term the concept index does not also resolve.
+no further subclasses of its own beyond what the extra roots contribute.
 
-`techniques` is curated, not derived: EDAM models assays as operations and data types rather
-than as a technique hierarchy in this domain, so there is nothing to walk. The 16 techniques
-cover shotgun and amplicon sequencing, assembly and co-assembly, binning and dereplication,
-taxonomic profiling, functional annotation and strain resolution.
+`subdomains` and `techniques` are curated, not derived. The classification vocabulary comes from
+the 2026-08-25 cross-domain audit, which dropped every term two or more sciences both declared —
+a term two sciences share cannot tell them apart — and left each domain only the qualified forms
+it alone utters. EDAM carries no label or synonym for any of the six subdomains that audit
+settled on, so the walk above cannot produce them and there is no further root that would; for
+techniques EDAM models assays as operations and data types rather than as a hierarchy to walk.
+The EDAM walk still backs claim enrichment and still emits its own sub-topic list as index
+provenance.
 
 ## Enrichment is exact-match
 
@@ -89,8 +92,8 @@ python -m indicium_adapters_metagenomics.data.build_edam_index
 ```
 
 Reads EDAM through EBI OLS4 (network, stdlib only), records the roots it was cut from, and emits
-the `subdomains` list off the same walk. Regenerate on an EDAM release. Never runs at install or
-import time.
+the walk's own sub-topic list as provenance. Regenerate on an EDAM release. Never runs at install
+or import time.
 
 ## Licence
 

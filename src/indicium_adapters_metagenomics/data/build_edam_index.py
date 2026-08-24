@@ -1,10 +1,13 @@
 """Maintainer script: regenerate ``edam_index.json`` from EDAM via EBI OLS4.
 
 The index is the label spine ``_edam.py`` matches claim text against, and the
-same walk emits the ``subtopics`` list that becomes
-``MetagenomicsAdapter.subdomains``. It is cut from a recorded set of EDAM
-roots: each root contributes itself and its direct subclasses, and each of
-those contributes its preferred label plus every exact synonym EDAM records.
+same walk emits the ``subtopics`` list, which records what EDAM itself files
+under these roots. Since the 2026-08-25 cross-domain vocabulary audit that list
+is provenance only -- ``MetagenomicsAdapter.subdomains`` is declared directly,
+because EDAM carries no label for the subdomains the audit settled on. It is
+cut from a recorded set of EDAM roots: each root contributes itself and its
+direct subclasses, and each of those contributes its preferred label plus
+every exact synonym EDAM records.
 Nothing is hand-added -- a label that EDAM does not carry resolves to a CURIE
 EDAM never issued, which is the wrong-CURIE failure the whole package is built
 to avoid.

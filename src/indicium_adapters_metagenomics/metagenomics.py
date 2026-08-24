@@ -40,11 +40,13 @@ class MetagenomicsAdapter:
     reasoning, the same pattern the genomics sibling uses for
     Metatranscriptomics.
 
-    ``subdomains`` are read off that same EDAM walk rather than hand-listed, so
-    the vocabulary is the field's own and moves with an EDAM release.
-    ``techniques`` are curated: EDAM models assays as operations and data
-    rather than as a technique hierarchy for this domain, so there is nothing
-    to derive.
+    ``subdomains`` and ``techniques`` are both curated. EDAM carries no label
+    or synonym for any of the six subdomains the 2026-08-25 cross-domain audit
+    settled on, so the EDAM walk cannot yield that set and there is no root to
+    add that would; the list is declared directly and ``_edam.subtopics()``
+    still reports what the walk does yield, as index provenance. EDAM models
+    assays as operations and data rather than as a technique hierarchy for this
+    domain, so techniques were never derivable either.
 
     Every qualifier matches ``^[a-z][a-z0-9_]*$`` (snake_case), required
     because Perspicacite routes adapter qualifiers onto the open
@@ -98,29 +100,29 @@ class MetagenomicsAdapter:
 
     ontology_prefixes: dict[str, str] = dict(METAGENOMICS_PREFIXES)
 
-    @property
-    def subdomains(self) -> tuple[str, ...]:
-        """EDAM's own sub-topics of the four collected roots, hyphenated."""
-        return _edam.subtopics()
+    # From the 2026-08-25 cross-domain vocabulary audit. A term two sciences
+    # both declare cannot tell them apart, so shared terms were dropped.
+    subdomains: tuple[str, ...] = (
+        "host-associated-metagenomics",
+        "environmental-metagenomics",
+        "clinical-metagenomics",
+        "viral-metagenomics",
+        "functional-metagenomics",
+        "ancient-metagenomics",
+    )
 
-    # Curated -- EDAM has no technique hierarchy to read for this domain.
+    # From the 2026-08-25 cross-domain vocabulary audit. A term two sciences
+    # both declare cannot tell them apart, so shared terms were dropped.
     techniques: tuple[str, ...] = (
         "shotgun-metagenomics",
         "whole-metagenome-sequencing",
-        "amplicon-sequencing",
-        "16s-rrna-amplicon-sequencing",
         "shallow-shotgun-sequencing",
         "long-read-metagenomics",
         "metagenome-assembly",
         "co-assembly",
-        "genome-binning",
-        "genome-dereplication",
-        "taxonomic-profiling",
-        "functional-annotation",
-        "strain-resolution",
-        "single-amplified-genome-sequencing",
-        "hi-c-proximity-ligation",
+        "metagenome-binning",
         "read-based-profiling",
+        "resistome-profiling",
     )
 
     # ---- protocol methods ---------------------------------------------------
