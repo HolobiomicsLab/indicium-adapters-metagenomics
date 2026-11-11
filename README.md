@@ -76,8 +76,10 @@ object text.
 
 ## Install
 
+The public dependencies are installed from PyPI with the development extra:
+
 ```bash
-uv pip install -e .
+python -m pip install -e ".[dev]"
 ```
 
 `requires-python >= 3.11`, matching the genomics and astronomy siblings, so this package can be
