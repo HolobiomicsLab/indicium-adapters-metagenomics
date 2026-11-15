@@ -100,3 +100,5 @@ or import time.
 ## Licence
 
 MIT.
+
+Cite this package with `CITATION.cff`.
